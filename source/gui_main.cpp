@@ -5,8 +5,8 @@
 #include <json.hpp>
 using json = nlohmann::json;
 
-constexpr const char *const amsContentsPath = "/atmosphere/contents";
-constexpr const char *const boot2FlagFormat = "/atmosphere/contents/%016lX/flags/boot2.flag";
+constexpr const char *const amsContentsPath = "/sxos/titles";
+constexpr const char *const boot2FlagFormat = "/sxos/titles/%016lX/flags/boot2.flag";
 
 static char pathBuffer[FS_MAX_PATH];
 
@@ -36,7 +36,7 @@ GuiMain::GuiMain() {
     /* Iterate over contents folder. */
     for (const auto &entry : FsDirIterator(contentDir)) {
         FsFile toolboxFile;
-        std::snprintf(pathBuffer, FS_MAX_PATH, "/atmosphere/contents/%s/toolbox.json", entry.name);
+        std::snprintf(pathBuffer, FS_MAX_PATH, "/sxos/titles/%s/toolbox.json", entry.name);
         rc = fsFsOpenFile(&this->m_fs, pathBuffer, FsOpenMode_Read, &toolboxFile);
         if (R_FAILED(rc))
             continue;
